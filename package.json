@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/benjaminhdavis8/node-sql/issues"
   },
-  "homepage": "https://github.com/benjaminhdavis8/node-sql#readme",
+  "homepage": "https://github.com/benjaminhdavis8/node-sql/public#index.html",
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.3",

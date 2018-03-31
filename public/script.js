@@ -1,8 +1,9 @@
-var app = new Vue({
+  var app = new Vue({
   el: '#app',
   data: {
     addedName: '',
     addedProblem: '',
+    addedPriority: '',
     tickets: [],
   },
   created: function() {
@@ -24,10 +25,16 @@ var app = new Vue({
       month[10] = "November";
       month[11] = "December";
       let date = new Date(ticket.created_at);
-      console.log(date);
       let monthName = month[date.getMonth()];
       return `${date.getDate()} ${monthName} ${date.getFullYear()}`
     },
+    priorityName: function(priority) {
+      let name = new Array();
+      name[0] = "High";
+      name[1] = "Medium";
+      name[2] = "Low";
+      return name[priority];
+    }
   },
   methods: {
     getTickets: function() {
@@ -35,18 +42,22 @@ var app = new Vue({
 	this.tickets = response.data;
 	return true;
       }).catch(err => {
+        console.log("getTickets failed");
       });
     },
     addTicket: function() {
       axios.post("http://localhost:3000/api/tickets", {
 	name: this.addedName,
 	problem: this.addedProblem,
+	priority: this.addedPriority
       }).then(response => {
 	this.addedName = "";
 	this.addedProblem = "";
+	this.addedPriority = "";
 	this.getTickets();
 	return true;
       }).catch(err => {
+        console.log("addTicket failed");
       });
     },
     deleteTicket: function(ticket) {
@@ -54,6 +65,7 @@ var app = new Vue({
 	this.getTickets();
 	return true;
       }).catch(err => {
+        console.log("deleteTicket faled");
       });
     },
   }
